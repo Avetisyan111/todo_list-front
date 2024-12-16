@@ -1,0 +1,112 @@
+<!DOCTYPE html >
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" 
+            integrity="sha384-+0n0VW2eSR50omGNYDnhzAbDs0XxcvSN1TPprVMTNDbiYZCYbOOl7+AMvyTG2x" crossorigin="anonymous">    
+        <title>Todo List</title>
+    </head>
+    <body>
+        
+        <div class="container" id="app" align="center">
+            <div class="row">
+                <div class="col-md-8 mx-auto my-5">
+                    
+                    <div v-if="successMsg">
+                        <b-alert show variant="success">
+                            {{successMsg}}
+                        </b-alert>
+                    </div>
+
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            <div class="lead">
+                                <button id="show-btn" @click="showModal('add-modal')" class="btn btn-sm btn-outline-primary">Create Task</button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <b-modal ref="add-modal" hide-footer title="Create Task">
+                                <form action="" @submit.prevent="onSubmit">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 21px">Title</label>
+                                        <input type="text" v-model="title" class="form-control" placeholder="Title of task">
+                                    </div>
+                                    <label for="" style="font-size: 21px">Description</label>
+                                    <div class="form-group">
+                                        <textarea v-model="description"  class="form-control" rows="10" placeholder="Add some description "></textarea>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-success" style="margin: 5px; width: 120px; height: 40px;">Add Task</button>&nbsp;
+                                        <b-button class="btn btn-sm btn-outline-danger" variant="outline-danger" block @click="hideModal('add-modal')"
+                                        style="margin: 5px; width: 120px; height: 40px;">Close </b-button>
+                                    </div>
+                                </form>
+                            </b-modal>    
+
+                            <div class="text-muted lead text-center" v-if="!all_tasks.length">No Tasks created</div>
+                            <div class="table-responsive" v-if="all_tasks.length">
+                                <table class="table table-borderless">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="task in all_tasks" :key="task.id">
+                                            <td>{{task.title}}</td>
+                                            <td>{{task.description}}</td>
+                                            <td>       
+                                                <button @click="deleteTask(task.id)" class="btn btn-sm btn-outline-danger"> Delete Task</button>
+                                                <button @click="editTask(task.id)" class="btn btn-sm btn-outline-warning"> Edit Task</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>            
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <b-modal ref="update-modal" hide-footer title="Edit Task">
+                            <form action="" @submit.prevent="onUpdate">
+                                <div class="form-group">
+                                    <label for="" style="font-size: 21px">Title</label>
+                                    <input type="text" v-model="updated_title" class="form-control">
+                                </div>
+                                <label for="" style="font-size: 21px">Description</label>
+                                <div class="from-group">
+                                    <textarea v-model="updated_description" class="form-control" rows="10"></textarea>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-success" style="margin: 5px; width: 120px; height: 40px;">Update Task</button>&nbsp;
+                                    <button class="btn btn-sm btn-outline-danger" variant="outline-danger" block @click="hideModal('update-modal')"
+                                        style="margin: 5px; width: 120px; height: 40px;">Close </button>
+                                </div>
+                            </form>
+                        </b-modal>
+                    </div>                   
+             
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ELJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" 
+            crossorigin="anonymous"></script>
+        <script src="app.js"></script>        
+
+    </body>
+</html>
+
+
+
+
+
