@@ -30,7 +30,7 @@
 
                         <div class="card-body">
                             <b-modal ref="add-modal" hide-footer title="Create Task">
-                                <form action="" @submit.prevent="onSubmit">
+                                <form @submit.prevent="onSubmit">
                                     <div class="form-group">
                                         <label for="" style="font-size: 21px">Title</label>
                                         <input type="text" v-model="title" class="form-control" placeholder="Title of task">
@@ -73,7 +73,7 @@
 
                     <div>
                         <b-modal ref="update-modal" hide-footer title="Edit Task">
-                            <form action="" @submit.prevent="onUpdate">
+                            <form @submit.prevent="onUpdate">
                                 <div class="form-group">
                                     <label for="" style="font-size: 21px">Title</label>
                                     <input type="text" v-model="updated_title" class="form-control">

@@ -1,21 +1,47 @@
 const userAuth = new Vue({
-    el: "#login",
+    el: "#signup",
 
     data: {
         name: '',
         lastname: '',
         login: '',
-        password: '',     
-    },
+        pass: '',    
+        msg: '', 
+    }, 
 
     methods: {
-        create_user() {
+        async createUser() {
             
+            if (this.name !== '' && this.lastname !== '' && this.login !== '' && this.pass !== '') {
+                let fd = new FormData();
+                
+                fd.append('name', this.name);
+                fd.append('lastname', this.lastname);
+                fd.append('login', this.login);
+                fd.append('pass', this.pass);
+
+                await axios({
+                    url: "/back/create_user.php",
+                    method: "POST",
+                    data: fd
+                }).then(response => {
+
+                    if (response.data.result == "success") {
+                        this.msg = "You have signed up sccessfully! ";
+                        this.name = this.lastname = this.login = this.pass = ""; 
+                    }
+                    else 
+                        this.msg = "Feild to send the data"
+
+                }).catch(error => {
+                    console.log(error)
+                })
+            } else {
+                console.log('Missing requirment!')
+            }
+        
         },
 
-        check_user() {
-
-        }
     }
 
 });
