@@ -10,7 +10,7 @@
         <title>Todo List</title>
     </head>
     <body>
-        
+    
         <div class="container" id="app" align="center">
             <div class="row">
                 <div class="col-md-8 mx-auto my-5">
@@ -46,7 +46,7 @@
                                     </div>
                                 </form>
                             </b-modal>    
-
+                            
                             <div class="text-muted lead text-center" v-if="!all_tasks.length">No Tasks created</div>
                             <div class="table-responsive" v-if="all_tasks.length">
                                 <table class="table table-borderless">
@@ -54,12 +54,14 @@
                                         <tr>
                                             <th>Title</th>
                                             <th>Description</th>
+                                            <th>Attachment</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="task in all_tasks" :key="task.id">
                                             <td>{{task.title}}</td>
                                             <td>{{task.description}}</td>
+                                            <td></td>
                                             <td>       
                                                 <button @click="deleteTask(task.id)" class="btn btn-sm btn-outline-danger"> Delete Task</button>
                                                 <button @click="editTask(task.id)" class="btn btn-sm btn-outline-warning"> Edit Task</button>
@@ -69,6 +71,10 @@
                                 </table>
                             </div>
                         </div>
+                    </div><br>
+
+                    <div id="app" align="right">
+                        <button @click="logOut" class="btn btn-outline-danger">Log out</button>
                     </div>
 
                     <div>
@@ -105,8 +111,3 @@
 
     </body>
 </html>
-
-
-
-
-

@@ -12,6 +12,12 @@
 
 <body>
     <div align="center" id="signup" class="container">
+        <div v-if="msg" >
+            <b-alert show variant="success">
+                {{ msg }}
+            </b-alert>
+        </div>
+
         <form @submit.prevent="createUser">
             <h2>Sign Up</h2>
             <label for="name">Name</label>
@@ -32,10 +38,13 @@
             </div><br>
             <div>
                 <button class="btn btn-outline-primary">Sign Up</button>
-            </div>
+            </div><br>
         </form>
-    </div>
 
+        <div>
+            <button onclick="window.location.href='login.html'" class="btn btn-outline-primary">Login Page</button>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
